@@ -3,14 +3,16 @@ This is my work on the WatiN source code. As one of my projects is still reusing
 
 ## Planned roadmap
 0. Cleaning the project.
-1. Change .Net version.
-2. Reuse Nuget for the needed libraries.
-3. Support for newer browsers:
+1. Move project to VS2017.
+2. Change .Net version.
+3. Reuse Nuget for the needed libraries.
+4. Support for newer browsers:
     1. Firefox (without JSSH, need to find what should be used).
     2. Chrome (Jeroen started worked on it, but it's in reaaalllyyy unstable place).
     3. IE 11 (Windows 10), Edge. (I don't think that IE 10 will be necessary).
-4. Fix tests (almost all of them).
-5. Remove documentation links to original page.
+5. Fix tests (almost all of them).
+6. Remove documentation links to original page.
+7. Fix examples folder.
 
 ## Credits
 @Jeroen van Menen - for the awesome work on this.
