@@ -2,6 +2,7 @@
 This is my work on the WatiN source code. As one of my projects is still reusing the WatiN (it's a good library for automated testing) I needed to make some changes to the source code. I'm leaving some of the original things, but some of them will be removed.
 
 ## Planned roadmap
+0. Cleaning the project.
 1. Reuse Nuget for the needed libraries.
 2. Support for newer browsers:
     1. Firefox (without JSSH, need to find what should be used).
