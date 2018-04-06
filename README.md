@@ -38,10 +38,10 @@ the terms and conditions for using and modifying WatiN.
 - Make sure you have a working IE6, IE7, IE8, IE9, Firefox 2 or Firefox 3.x installed on your machine.
 - The .Net 2.0 or later framework needs to be installed.
 
-### Installing WatiN
-- Create an installation directory like C:\Program Files\WatiN <versionnumber>.
-- unzip the files in this zip file to the installation directory.
-- ready!
+### ~~Installing WatiN~~
+- ~~Create an installation directory like C:\Program Files\WatiN <versionnumber>.~~
+- ~~unzip the files in this zip file to the installation directory.~~
+- ~~ready!~~
 
 ### Using WatiN
 Following are the basic steps:
