@@ -56,7 +56,7 @@ namespace WatiN.Core.UnitTests.ResearchTests
             }
         }
 
-        [Test, Ignore]
+        [Test, Ignore("TODO: Why it's ignored?")]
         public void Should_get_dimension()
         {
             var nativeElement = Ie.Button("popupid").NativeElement;

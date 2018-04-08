@@ -19,7 +19,6 @@
 using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using WatiN.Core.Constraints;
 using WatiN.Core.Native;
 
@@ -41,7 +40,7 @@ namespace WatiN.Core.UnitTests
             finder.CallFindAllImpl();
 
             // THEN
-            finder.MockElementCollection.Verify(collection => collection.GetElementsById("myId"));
+            //TODO: finder.MockElementCollection.Verify(collection => collection.GetElementsById("myId")); <--- Verify()
         }
 
         [Test]
@@ -54,7 +53,7 @@ namespace WatiN.Core.UnitTests
             finder.CallFindAllImpl();
 
             // THEN
-            finder.MockElementCollection.Verify(collection => collection.GetElementsByTag("div"));
+            //TODO: finder.MockElementCollection.Verify(collection => collection.GetElementsByTag("div")); <--- Verify()
         }
 
         [Test]

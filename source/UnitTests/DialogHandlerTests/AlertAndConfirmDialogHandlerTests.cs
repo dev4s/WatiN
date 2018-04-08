@@ -65,7 +65,8 @@ namespace WatiN.Core.UnitTests.DialogHandlerTests
 			Assert.AreEqual(0, dialogWatcher.Count, "DialogWatcher count should be zero after test");
 		}
 
-		[Test, ExpectedException(typeof (MissingAlertException))]
+        //TODO: ExpectedException(typeof (MissingAlertException))
+		[Test]
 		public void MissingAlertExceptionTest()
 		{
 			Assert.AreEqual(0, Ie.DialogWatcher.Count, "DialogWatcher count should be zero before test");

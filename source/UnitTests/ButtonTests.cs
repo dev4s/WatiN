@@ -20,7 +20,6 @@ using System;
 using System.Collections;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using WatiN.Core.Exceptions;
 using WatiN.Core.UnitTests.TestUtils;
 
@@ -59,7 +58,7 @@ namespace WatiN.Core.UnitTests
 		                        }
 		                        catch (Exception e)
 		                        {
-		                            Assert.That(e, Is.InstanceOfType(typeof(ElementDisabledException)), "Unexpected exception");
+		                            Assert.That(e, Is.TypeOf(typeof(ElementDisabledException)), "Unexpected exception");
 		                        }
 		                    });
 
@@ -95,8 +94,8 @@ namespace WatiN.Core.UnitTests
 		                        }
 		                        catch (ElementNotFoundException e)
 		                        {
-                                    Assert.That(e.Message, Text.StartsWith("Could not find BUTTON or INPUT (button) or INPUT (reset) or INPUT (submit) element tag matching criteria: Attribute 'id' equals 'noneexistingbuttonid' at file://"));
-		                            Assert.That(e.Message, Text.EndsWith("main.html"));
+                                    Assert.That(e.Message, Does.StartWith("Could not find BUTTON or INPUT (button) or INPUT (reset) or INPUT (submit) element tag matching criteria: Attribute 'id' equals 'noneexistingbuttonid' at file://"));
+		                            Assert.That(e.Message, Does.StartWith("main.html"));
 		                        }
 
 		                    });
@@ -157,7 +156,7 @@ namespace WatiN.Core.UnitTests
 		                            buttonEnumerator.MoveNext();
 		                            var enumButton = buttonEnumerator.Current;
 
-		                            Assert.IsInstanceOfType(inputButton.GetType(), enumButton, "Types are not the same");
+		                            Assert.IsInstanceOf(inputButton.GetType(), enumButton, "Types are not the same");
 		                            Assert.AreEqual(inputButton.OuterHtml, ((Button) enumButton).OuterHtml, "foreach and IEnumator don't act the same.");
 		                            ++count;
 		                        }
@@ -217,8 +216,8 @@ namespace WatiN.Core.UnitTests
 		                        const string popupValue = "Show modeless dialog";
 		                        var button = browser.Button(Find.ById("popupid"));
 
-		                        Assert.IsInstanceOfType(typeof (Element), button);
-		                        Assert.IsInstanceOfType(typeof (Button), button);
+		                        Assert.IsInstanceOf(typeof (Element), button);
+		                        Assert.IsInstanceOf(typeof (Button), button);
 
 		                        Assert.AreEqual(popupValue, button.Value);
 		                        Assert.AreEqual(popupValue, browser.Button("popupid").Value);
@@ -245,8 +244,8 @@ namespace WatiN.Core.UnitTests
 
 		                        var button = browser.Button(Find.ById("buttonelementid"));
 
-		                        Assert.IsInstanceOfType(typeof (Element), button);
-		                        Assert.IsInstanceOfType(typeof (Button), button);
+		                        Assert.IsInstanceOf(typeof (Element), button);
+		                        Assert.IsInstanceOf(typeof (Button), button);
 
 		                        Assert.AreEqual(value, browser.Button("buttonelementid").Value);
 		                        Assert.AreEqual(value, browser.Button("buttonelementid").ToString());

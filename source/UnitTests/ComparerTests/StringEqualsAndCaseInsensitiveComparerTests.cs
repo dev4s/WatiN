@@ -20,9 +20,7 @@ using System;
 using System.Globalization;
 using System.Threading;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using WatiN.Core.Comparers;
-using WatiN.Core.Interfaces;
 
 namespace WatiN.Core.UnitTests
 {
@@ -44,7 +42,8 @@ namespace WatiN.Core.UnitTests
 			Assert.IsFalse(comparer.Compare(null), "null should not match");
 		}
 
-		[Test, ExpectedException(typeof (ArgumentNullException))]
+        //TODO: ExpectedException(typeof (ArgumentNullException))
+		[Test]
 		public void ConstructorWithNullShouldThrowArgumentNullException()
 		{
 			new StringEqualsAndCaseInsensitiveComparer(null);

@@ -20,7 +20,6 @@ using System;
 using System.Text.RegularExpressions;
 using Moq;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using WatiN.Core.Exceptions;
 using WatiN.Core.Native;
 using WatiN.Core.UnitTests.TestUtils;
@@ -218,7 +217,7 @@ namespace WatiN.Core.UnitTests
                                 }
                                 catch (Exception e)
                                 {
-                                    Assert.That(e, Is.InstanceOfType(typeof(TimeoutException)));
+                                    Assert.That(e, Is.InstanceOf(typeof(TimeoutException)));
                                 }
                                 finally
                                 {
@@ -260,7 +259,7 @@ namespace WatiN.Core.UnitTests
                                 }
                                 catch (Exception e)
                                 {
-                                    Assert.That(e, Is.InstanceOfType(typeof(TimeoutException)));
+                                    Assert.That(e, Is.InstanceOf(typeof(TimeoutException)));
                                 }
                                 finally
                                 {
@@ -519,7 +518,7 @@ namespace WatiN.Core.UnitTests
                                 text = newlineSpaces.Replace(text, "");
 
                                 // THEN
-                                Assert.That(text, NUnit.Framework.SyntaxHelpers.Text.StartsWith("col1col2a1a2b1b2"));
+                                Assert.That(text, Does.StartWith("col1col2a1a2b1b2"));
                             });
         }
 
@@ -535,7 +534,7 @@ namespace WatiN.Core.UnitTests
                                 outerHtml = outerHtml.Replace("\r\n", "");
                                 
                                 // THEN
-                                Assert.That(outerHtml, NUnit.Framework.SyntaxHelpers.Text.StartsWith("<body style="));
+                                Assert.That(outerHtml, Does.StartWith("<body style="));
                             });
         }
     }

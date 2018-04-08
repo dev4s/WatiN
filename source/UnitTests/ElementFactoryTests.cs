@@ -19,7 +19,6 @@
 using System;
 using System.Collections;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using WatiN.Core.Native;
 
 namespace WatiN.Core.UnitTests

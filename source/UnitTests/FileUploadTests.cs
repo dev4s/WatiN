@@ -20,7 +20,6 @@ using System;
 using System.Collections;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using System.Collections.Generic;
 using WatiN.Core.UnitTests.TestUtils;
 
@@ -62,7 +61,7 @@ namespace WatiN.Core.UnitTests
 	                            var fileUpload = browser.FileUpload("upload");
 
 	                            Assert.That(fileUpload.Exists, "Pre-Condition: Expected file upload element");
-	                            Assert.That(fileUpload.FileName,Text.DoesNotEndWith(fileName), "pre-Condition: Filename already set as default");
+	                            Assert.That(fileUpload.FileName, Does.Not.EndWith(fileName), "pre-Condition: Filename already set as default");
 
 	                            var file = new Uri(HtmlTestBaseURI, fileName).LocalPath;
 
@@ -70,7 +69,7 @@ namespace WatiN.Core.UnitTests
 	                            fileUpload.Set(file);
 
 	                            // THEN
-	                            Assert.That(fileUpload.FileName, Text.EndsWith(fileName), "Unexpected filename");
+	                            Assert.That(fileUpload.FileName, Does.EndWith(fileName), "Unexpected filename");
 	                        });
 	    }
 
@@ -84,18 +83,19 @@ namespace WatiN.Core.UnitTests
 		                        var fileUpload = browser.FileUpload("upload");
 
 		                        Assert.That(fileUpload.Exists);
-                                Assert.That(fileUpload.FileName, Text.DoesNotEndWith(fileName), "pre-Condition: Filename already set as default");
+                                Assert.That(fileUpload.FileName, Does.Not.EndWith(fileName), "pre-Condition: Filename already set as default");
 
                                 // WHEN
 		                        fileUpload.Set(MainURI.LocalPath);
 
                                 // THEN
-		                        Assert.That(fileUpload.FileName, Text.EndsWith(fileName));
+		                        Assert.That(fileUpload.FileName, Does.EndWith(fileName));
 		                    });
 		}
 
         // TODO: Should be mocked cause this WatiN behaviour not browser related
-		[Test, ExpectedException(typeof (System.IO.FileNotFoundException))]
+        //TODO: ExpectedException(typeof (System.IO.FileNotFoundException))
+		[Test]
 		public void FileUploadFileNotFoundException()
 		{
 			var fileUpload = Ie.FileUpload("upload");
@@ -126,7 +126,7 @@ namespace WatiN.Core.UnitTests
 		                            FileUploadEnumerator.MoveNext();
 		                            var enumFileUpload = FileUploadEnumerator.Current;
 
-		                            Assert.IsInstanceOfType(inputFileUpload.GetType(), enumFileUpload, "Types are not the same");
+		                            Assert.IsInstanceOf(inputFileUpload.GetType(), enumFileUpload, "Types are not the same");
 		                            Assert.AreEqual(inputFileUpload.OuterHtml, ((FileUpload) enumFileUpload).OuterHtml, "foreach and IEnumator don't act the same.");
 		                            ++count;
 		                        }

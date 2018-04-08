@@ -58,14 +58,14 @@ namespace WatiN.Core.UnitTests.TestUtils
         public static string GoogleUrl = "http://www.google.com";
         public static string EbayUrl = "http://www.ebay.com";
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public virtual void FixtureSetup()
         {
             _backupSettings = Settings.Clone();
             Settings.Instance = new StealthSettings();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public virtual void FixtureTearDown()
         {
             Settings.Instance = _backupSettings;

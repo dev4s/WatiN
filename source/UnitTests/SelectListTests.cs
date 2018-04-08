@@ -88,7 +88,8 @@ namespace WatiN.Core.UnitTests
 		                    });
 		}
 
-        [Test, ExpectedException(typeof(SelectListItemNotFoundException), ExpectedMessage = "No item was found in the selectlist matching constraint: Attribute 'innertext' equals 'None existing item' ignoring case")]
+        //TODO: ExpectedException(typeof(SelectListItemNotFoundException), ExpectedMessage = "No item was found in the selectlist matching constraint: Attribute 'innertext' equals 'None existing item' ignoring case")
+        [Test]
 		public void SelectItemNotFoundException()
 		{
 		    ExecuteTest(browser =>
@@ -99,7 +100,8 @@ namespace WatiN.Core.UnitTests
 		                    });
 		}
 
-		[Test, ExpectedException(typeof (SelectListItemNotFoundException))]
+        //TODO: ExpectedException(typeof (SelectListItemNotFoundException))
+		[Test]
 		public void SelectPartialTextMatchItemNotFoundException()
 		{
 		    ExecuteTest(browser =>
@@ -110,7 +112,8 @@ namespace WatiN.Core.UnitTests
 		                    });
 		}
 
-        [Test, ExpectedException(typeof(SelectListItemNotFoundException), ExpectedMessage = "No item was found in the selectlist matching constraint: Attribute 'innertext' equals 'None existing item' ignoring case")]
+        //TODO: ExpectedException(typeof(SelectListItemNotFoundException), ExpectedMessage = "No item was found in the selectlist matching constraint: Attribute 'innertext' equals 'None existing item' ignoring case")
+        [Test]
 		public void SelectItemNotFoundExceptionForMultiple()
 		{
 		    ExecuteTest(browser =>
@@ -120,7 +123,8 @@ namespace WatiN.Core.UnitTests
 		                    });
 		}
 
-		[Test, ExpectedException(typeof (SelectListItemNotFoundException))]
+        //TODO: ExpectedException(typeof (SelectListItemNotFoundException))
+		[Test]
 		public void SelectPartialTextMatchItemNotFoundExceptionForMultiple()
 		{
 		    ExecuteTest(browser =>
@@ -156,7 +160,7 @@ namespace WatiN.Core.UnitTests
 		                            selectListEnumerator.MoveNext();
 		                            var enumSelectList = selectListEnumerator.Current;
 
-		                            Assert.IsInstanceOfType(selectList.GetType(), enumSelectList, "Types are not the same");
+		                            Assert.IsInstanceOf(selectList.GetType(), enumSelectList, "Types are not the same");
 		                            Assert.AreEqual(selectList.OuterHtml, ((SelectList) enumSelectList).OuterHtml, "foreach and IEnumator don't act the same.");
 		                            ++count;
 		                        }

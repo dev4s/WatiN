@@ -21,9 +21,7 @@ using System.Globalization;
 using System.Threading;
 using System.Web;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using WatiN.Core.Comparers;
-using WatiN.Core.Interfaces;
 
 namespace WatiN.Core.UnitTests
 {
@@ -91,7 +89,8 @@ namespace WatiN.Core.UnitTests
 			Assert.IsFalse(comparer.Compare("http://www.microsoft.com/"), "Should ignore completely different site");
 		}
 
-		[Test, ExpectedException(typeof (ArgumentNullException))]
+        //TODO: ExpectedException(typeof (ArgumentNullException))
+		[Test]
 		public void ConstructorWithNullShouldThrowArgumentNullException()
 		{
 			new UriComparer(null);

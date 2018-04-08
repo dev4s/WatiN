@@ -17,10 +17,7 @@
 #endregion Copyright
 
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
-using WatiN.Core.Interfaces;
 using WatiN.Core.Logging;
-using System;
 
 namespace WatiN.Core.UnitTests
 {

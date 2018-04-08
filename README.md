@@ -2,15 +2,17 @@
 This is my work on the WatiN source code. As one of my projects is still reusing the WatiN (it's a good library for automated testing) I needed to make some changes to the source code. I'm leaving some of the original things, but some of them will be removed.
 
 ## Planned roadmap
-0. Cleaning the project.
-1. Move project to VS2017.
-2. Change .Net version.
-3. Reuse Nuget for the needed libraries.
+0. Cleaning the project. :heavy_check_mark:
+1. Move project to VS2017. :heavy_check_mark:
+2. Change .Net version. :heavy_check_mark:
+3. Reuse Nuget for the needed libraries (and use newer ones, we like this :)). :heavy_check_mark:
 4. Support for newer browsers:
     1. Firefox (without JSSH, need to find what should be used).
     2. Chrome (Jeroen started worked on it, but it's in reaaalllyyy unstable place).
-    3. IE 11 (Windows 10), Edge. (I don't think that IE 10 will be necessary).
-5. Fix tests (almost all of them).
+    3. IE 11 (Windows 10), Edge. (I don't think that IE 10 will be necessary [it should work, but I don't think it should support it]).
+    4. PhantomJS.
+5. Move browsers support to external libraries, should reduce dependencies and also allow to write plugins for other "browsers".
+5. Fix tests (almost all of them, moqs).
 6. Remove documentation links to original page.
 7. Fix examples folder.
 

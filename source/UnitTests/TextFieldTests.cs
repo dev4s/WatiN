@@ -20,7 +20,6 @@ using System;
 using System.Collections;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using WatiN.Core.Exceptions;
 using WatiN.Core.UnitTests.TestUtils;
 
@@ -254,7 +253,7 @@ namespace WatiN.Core.UnitTests
 		                        }
 		                        catch (Exception e)
 		                        {
-		                            Assert.That(e, Is.InstanceOfType(typeof(ElementReadOnlyException)), "Unexpected exception");
+		                            Assert.That(e, Is.InstanceOf(typeof(ElementReadOnlyException)), "Unexpected exception");
 		                            Assert.That(e.Message, Is.EqualTo("Element with Id:readonlytext is readonly"));
 		                        }
 		                    });
@@ -278,7 +277,7 @@ namespace WatiN.Core.UnitTests
 		                        }
 		                        catch (Exception e)
 		                        {
-		                            Assert.That(e, Is.InstanceOfType(typeof(ElementDisabledException)), "Unexpected exception");
+		                            Assert.That(e, Is.InstanceOf(typeof(ElementDisabledException)), "Unexpected exception");
                                     Assert.That(e.Message, Is.EqualTo("Element with Id:disabledtext is disabled"), "Unexpected message");
 		                        }
 		                    });
@@ -297,8 +296,8 @@ namespace WatiN.Core.UnitTests
 		                        }
 		                        catch (ElementNotFoundException e)
 		                        {
-                                    Assert.That(e.Message, Text.StartsWith("Could not find INPUT (hidden) or INPUT (password) or INPUT (text) or INPUT (textarea) or TEXTAREA element tag matching criteria: Attribute 'id' equals 'noneexistingtextfieldid' at file://"));
-		                            Assert.That(e.Message, Text.EndsWith("main.html"));
+                                    Assert.That(e.Message, Does.StartWith("Could not find INPUT (hidden) or INPUT (password) or INPUT (text) or INPUT (textarea) or TEXTAREA element tag matching criteria: Attribute 'id' equals 'noneexistingtextfieldid' at file://"));
+		                            Assert.That(e.Message, Does.EndWith("main.html"));
 		                        }
 		                    });
 		}
@@ -332,7 +331,7 @@ namespace WatiN.Core.UnitTests
 		                            textfieldEnumerator.MoveNext();
 		                            var enumTextfield = textfieldEnumerator.Current;
 
-		                            Assert.IsInstanceOfType(textField.GetType(), enumTextfield, "Types are not the same");
+		                            Assert.IsInstanceOf(textField.GetType(), enumTextfield, "Types are not the same");
 		                            Assert.AreEqual(textField.OuterHtml, ((TextField) enumTextfield).OuterHtml, "foreach and IEnumator don't act the same.");
 		                            ++count;
 		                        }

@@ -18,7 +18,6 @@
 
 using Moq;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using SHDocVw;
 using WatiN.Core.Interfaces;
 using WatiN.Core.Native.InternetExplorer;

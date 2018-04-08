@@ -22,7 +22,6 @@ using System;
 using System.IO;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using WatiN.Core.Constraints;
 using WatiN.Core.Interfaces;
 

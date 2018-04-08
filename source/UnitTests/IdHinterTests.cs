@@ -18,7 +18,6 @@
 
 using System;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using WatiN.Core.Constraints;
 
 namespace WatiN.Core.UnitTests

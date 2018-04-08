@@ -17,6 +17,9 @@
 #endregion Copyright
 
 using System.Reflection;
+using System.Threading;
+using NUnit.Framework;
+
 //
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -27,9 +30,10 @@ using System.Reflection;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("WatiN")]
-[assembly: AssemblyCopyright("2006 - 2011 Jeroen van Menen")]
+[assembly: AssemblyCopyright("2006 - 2011 Jeroen van Menen; 2018 dev4s")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+[assembly: Apartment(ApartmentState.STA)]
 
 //
 // Version information for an assembly consists of the following four values:
@@ -42,5 +46,5 @@ using System.Reflection;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("2.1.0.1196")]
-[assembly: AssemblyFileVersion("2.1.0.1196")]
+[assembly: AssemblyVersion("2.1.0.1200")]
+[assembly: AssemblyFileVersion("2.1.0.1200")]

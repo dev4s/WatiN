@@ -18,7 +18,6 @@
 
 using System;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using WatiN.Core.UnitTests.TestUtils;
 
 namespace WatiN.Core.UnitTests
@@ -54,7 +53,7 @@ namespace WatiN.Core.UnitTests
                                 nestedFrame.Link("googlelink").MouseUp();
 
                                 // THEN
-                                Assert.That(nestedFrame.Url, Text.Contains("google"));
+                                Assert.That(nestedFrame.Url, Does.Contain("google"));
                             });
         }
 

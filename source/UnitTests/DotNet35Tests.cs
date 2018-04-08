@@ -19,8 +19,6 @@
 using System;
 using NUnit.Framework;
 using System.Linq;
-using NUnit.Framework.SyntaxHelpers;
-using WatiN.Core.UnitTests.TestUtils;
 
 namespace WatiN.Core.UnitTests.DotNet35
 {
@@ -30,6 +28,7 @@ namespace WatiN.Core.UnitTests.DotNet35
     [TestFixture]
     public class LinqToWatiNTests
     {
+        //TODO: check for directives and try to remove them
         #if SPEEDTEST
         [Test]
         public void UseLambasSpeedTest()

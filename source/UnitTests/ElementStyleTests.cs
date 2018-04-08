@@ -16,7 +16,6 @@
 
 #endregion Copyright
 
-using NUnit.Framework.SyntaxHelpers;
 using System;
 using Moq;
 using NUnit.Framework;
@@ -75,11 +74,12 @@ namespace WatiN.Core.UnitTests
 
             foreach (var item in items)
             {
-                Assert.That(cssText, Text.Contains(item.ToLowerInvariant().Trim()));
+                Assert.That(cssText, Does.Contain(item.ToLowerInvariant().Trim()));
             }
         }
 
-        [Test, ExpectedException(typeof(ArgumentNullException))]
+        //TODO: ExpectedException(typeof(ArgumentNullException))
+        [Test]
         public void GetAttributeValueOfNullThrowsArgumenNullException()
         {
             // GIVEN
@@ -93,7 +93,8 @@ namespace WatiN.Core.UnitTests
             // THEN exception
         }
 
-        [Test, ExpectedException(typeof(ArgumentNullException))]
+        //TODO: ExpectedException(typeof(ArgumentNullException))
+        [Test]
         public void GetAttributeValueOfEmptyStringThrowsArgumenNullException()
         {
             // GIVEN
@@ -253,7 +254,7 @@ namespace WatiN.Core.UnitTests
                 var backgroundUrl = divWithExternalStyleApplied.Style.GetAttributeValue("BACKGROUND-IMAGE");
 
                 // THEN
-                Assert.That(backgroundUrl, Text.Contains("watin.jpg"));
+                Assert.That(backgroundUrl, Does.Contain("watin.jpg"));
             });
         }
     }

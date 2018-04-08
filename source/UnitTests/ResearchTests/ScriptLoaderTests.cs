@@ -18,7 +18,6 @@
 
 using System;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using WatiN.Core.UnitTests.TestUtils;
 using WatiN.Core.UtilityClasses;
 
@@ -39,7 +38,7 @@ namespace WatiN.Core.UnitTests.ResearchTests
             // THEN
             Console.WriteLine(script);
             Assert.That(script, Is.Not.Null, "expected script");
-            Assert.That(script, Text.Contains("Sizzle"), "expected Sizzle function");
+            Assert.That(script, Does.Contain("Sizzle"), "expected Sizzle function");
         }
 
         [Test]

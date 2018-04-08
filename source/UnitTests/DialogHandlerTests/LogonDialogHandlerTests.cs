@@ -40,13 +40,15 @@ namespace WatiN.Core.UnitTests.DialogHandlerTests
 			}
 		}
 
-		[Test, ExpectedException(typeof (ArgumentNullException))]
+        //TODO: ExpectedException(typeof (ArgumentNullException))
+		[Test]
 		public void LogonDialogWithUserNameNullShouldThrowArgumentNullException()
 		{
 			new LogonDialogHandler(null, "pwd");
 		}
 
-		[Test, ExpectedException(typeof (ArgumentNullException))]
+        //TODO: ExpectedException(typeof (ArgumentNullException))
+		[Test]
 		public void LogonDialogWithUserNameStringEmptyShouldThrowArgumentNullException()
 		{
 			new LogonDialogHandler(String.Empty, "pwd");

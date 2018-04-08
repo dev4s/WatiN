@@ -23,7 +23,6 @@ using System.Net;
 using System.Threading;
 using System.Web;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using SHDocVw;
 using WatiN.Core.Constraints;
 using WatiN.Core.DialogHandlers;
@@ -37,7 +36,7 @@ namespace WatiN.Core.UnitTests.IETests
     [TestFixture]
     public class IeTests : BaseWatiNTest
     {
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public override void FixtureSetup()
         {
             base.FixtureSetup();
@@ -75,9 +74,9 @@ namespace WatiN.Core.UnitTests.IETests
         {
             using (var ie = new IE())
             {
-                Assert.IsInstanceOfType(typeof (IE), ie, "Should be an IE instance");
-                Assert.IsInstanceOfType(typeof (Browser), ie, "Should be a Browser instance");
-                Assert.IsInstanceOfType(typeof (DomContainer), ie, "Should be a DomContainer instance");
+                Assert.IsInstanceOf(typeof (IE), ie, "Should be an IE instance");
+                Assert.IsInstanceOf(typeof (Browser), ie, "Should be a Browser instance");
+                Assert.IsInstanceOf(typeof (DomContainer), ie, "Should be a DomContainer instance");
             }
         }
 
@@ -115,7 +114,7 @@ namespace WatiN.Core.UnitTests.IETests
         {
             using (var ie = new IE("www.google.com"))
             {
-                Assert.That(ie.Url, Text.StartsWith("http://"));
+                Assert.That(ie.Url, Does.StartWith("http://"));
             }
         }
 
@@ -454,7 +453,8 @@ namespace WatiN.Core.UnitTests.IETests
             }
         }
 
-        [Test, ExpectedException(typeof (ArgumentOutOfRangeException))]
+        //TODO: ExpectedException(typeof (ArgumentOutOfRangeException))
+        [Test]
         public void AttachToIEWithNegativeTimeoutNotAllowed()
         {
             Browser.AttachTo<IE>(Find.ByTitle("Bogus title"), -1);
@@ -522,7 +522,7 @@ namespace WatiN.Core.UnitTests.IETests
             }
             catch (Exception e)
             {
-                Assert.IsInstanceOfType(typeof (BrowserNotFoundException), e);
+                Assert.IsInstanceOf(typeof (BrowserNotFoundException), e);
                 // add 1 second to give it some slack.
                 Assert.Greater(timeoutTime + 1, DateTime.Now.Subtract(startTime).TotalSeconds);
                 Logger.LogDebug(e.Message);
@@ -545,7 +545,8 @@ namespace WatiN.Core.UnitTests.IETests
             ie.Dispose();
         }
 
-        [Test, ExpectedException(typeof (ObjectDisposedException))]
+        //TODO: ExpectedException(typeof (ObjectDisposedException))
+        [Test]
         public void CallingIEForceCloseAfterIECloseShouldThrowAnExeption()
         {
             var ie = new IE();
@@ -632,7 +633,7 @@ namespace WatiN.Core.UnitTests.IETests
                 var process = Process.GetProcessById(processId);
 
                 // THEN
-                Assert.That(process.ProcessName, Text.Contains("iexplore"));
+                Assert.That(process.ProcessName, Does.Contain("iexplore"));
             }
         }
         

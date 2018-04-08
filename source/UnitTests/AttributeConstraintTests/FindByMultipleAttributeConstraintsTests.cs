@@ -126,10 +126,10 @@ namespace WatiN.Core.UnitTests.AttributeConstraintTests
             Assert.IsFalse(compare);
         }
 
-        [Test, ExpectedException(typeof (ArgumentOutOfRangeException))]
+        [Test]
         public void OccurrenceShouldNotAcceptNegativeValue()
         {
-            new IndexConstraint(-1);
+            Assert.Throws<ArgumentOutOfRangeException>(() => new IndexConstraint(-1));
         }
 
         [Test]
@@ -272,7 +272,8 @@ namespace WatiN.Core.UnitTests.AttributeConstraintTests
             Assert.IsFalse(findBy.Matches(mockAttributeBag, context));
         }
 
-        [Test, ExpectedException(typeof (ReEntryException))]
+        //TODO: run test to check ExpectedException(typeof (ReEntryException))
+        [Test]
         public void RecusiveCallExceptionExpected()
         {
             var mockAttributeBag = new Mock<IAttributeBag>();

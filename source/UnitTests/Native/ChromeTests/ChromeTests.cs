@@ -64,9 +64,9 @@ namespace WatiN.Core.UnitTests.Native.ChromeTests
         {
             using (var chrome = new Chrome())
             {
-                Assert.IsInstanceOfType(typeof(Chrome), chrome, "Should be a Chrome instance");
-                Assert.IsInstanceOfType(typeof(Browser), chrome, "Should be a Browser instance");
-                Assert.IsInstanceOfType(typeof(DomContainer), chrome, "Should be a DomContainer instance");
+                Assert.IsInstanceOf(typeof(Chrome), chrome, "Should be a Chrome instance");
+                Assert.IsInstanceOf(typeof(Browser), chrome, "Should be a Browser instance");
+                Assert.IsInstanceOf(typeof(DomContainer), chrome, "Should be a DomContainer instance");
             }
         }
 

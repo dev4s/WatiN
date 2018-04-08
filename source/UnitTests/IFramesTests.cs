@@ -19,7 +19,6 @@
 using System;
 using System.Collections;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using WatiN.Core.Exceptions;
 using WatiN.Core.UnitTests.TestUtils;
 
@@ -45,7 +44,7 @@ namespace WatiN.Core.UnitTests
                 }
                 catch (Exception e)
                 {
-                    Assert.That(e, Is.InstanceOfType(typeof(FrameNotFoundException)), "Unexpected exception");
+                    Assert.That(e, Is.InstanceOf(typeof(FrameNotFoundException)), "Unexpected exception");
                     Assert.That(e.Message, Is.EqualTo("Could not find a Frame or IFrame matching constraint: Attribute 'id' equals 'NonExistingIFrameID'"), "Unexpected message");
                 }
             });
@@ -122,7 +121,7 @@ namespace WatiN.Core.UnitTests
 		                            frameEnumerator.MoveNext();
 		                            var enumFrame = frameEnumerator.Current;
 
-		                            Assert.IsInstanceOfType(frame.GetType(), enumFrame, "Types are not the same");
+		                            Assert.IsInstanceOf(frame.GetType(), enumFrame, "Types are not the same");
 		                            Assert.AreEqual(frame.Html, ((Frame) enumFrame).Html, "foreach and IEnumator don't act the same.");
 		                            ++count;
 		                        }

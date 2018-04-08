@@ -64,7 +64,7 @@ namespace WatiN.Core.UnitTests.TestUtils
             }
         }
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public override void FixtureSetup()
         {
             base.FixtureSetup();
@@ -77,7 +77,7 @@ namespace WatiN.Core.UnitTests.TestUtils
             Logger.LogWriter = new ConsoleLogWriter {HandlesLogDebug = true};
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public override void FixtureTearDown()
         {
             var exceptions = new List<Exception>();

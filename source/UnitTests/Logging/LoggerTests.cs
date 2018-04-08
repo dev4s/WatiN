@@ -18,7 +18,6 @@
 
 using Moq;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using WatiN.Core.Interfaces;
 using WatiN.Core.Logging;
 using System;
@@ -32,13 +31,13 @@ namespace WatiN.Core.UnitTests
 
 		private ILogWriter originalLogWriter;
 
-		[TestFixtureSetUp]
+		[OneTimeSetUp]
 		public void FixtureSetUp()
 		{
 			originalLogWriter = Logger.LogWriter;
 		}
 
-		[TestFixtureTearDown]
+		[OneTimeTearDown]
 		public void FixtureTearDown()
 		{
 			Logger.LogWriter = originalLogWriter;
@@ -48,14 +47,14 @@ namespace WatiN.Core.UnitTests
 		public void SettingLogWriterToNullShouldReturnNoLogClass()
 		{
 			Logger.LogWriter = null;
-			Assert.IsInstanceOfType(typeof (NoLog), Logger.LogWriter);
+			Assert.IsInstanceOf(typeof (NoLog), Logger.LogWriter);
 		}
 
 		[Test]
 		public void SettingLogWriterShouldReturnThatLogWriter()
 		{
 			Logger.LogWriter = new DebugLogWriter();
-			Assert.IsInstanceOfType(typeof (DebugLogWriter), Logger.LogWriter);
+			Assert.IsInstanceOf(typeof (DebugLogWriter), Logger.LogWriter);
 		}
 
 		[Test]

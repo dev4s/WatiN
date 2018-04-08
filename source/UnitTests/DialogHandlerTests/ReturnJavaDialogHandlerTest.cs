@@ -18,7 +18,6 @@
 
 using System.Threading;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using SHDocVw;
 using WatiN.Core.Constraints;
 using WatiN.Core.DialogHandlers;
@@ -39,10 +38,10 @@ namespace WatiN.Core.UnitTests.DialogHandlerTests
             var handler = ReturnDialogHandler.CreateInstance();
 
             // THEN
-            if (ie_version < 9)
-                Assert.That(handler, Is.InstanceOfType(typeof(ReturnDialogHandler)));
-            else
-                Assert.That(handler, Is.InstanceOfType(typeof(ReturnDialogHandlerIe9)));
+            Assert.That(handler,
+                ie_version < 9
+                    ? Is.InstanceOf(typeof(ReturnDialogHandler))
+                    : Is.InstanceOf(typeof(ReturnDialogHandlerIe9)));
         }
 
         [Test]

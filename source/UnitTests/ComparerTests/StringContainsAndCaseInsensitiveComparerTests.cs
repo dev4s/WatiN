@@ -41,7 +41,8 @@ namespace WatiN.Core.UnitTests
 			Assert.IsFalse(comparer.Compare(null), "null should not match");
 		}
 
-		[Test, ExpectedException(typeof (ArgumentNullException))]
+        //TODO: check exceptions ExpectedException(typeof (ArgumentNullException))
+		[Test]
 		public void ConstructorWithNullShouldThrowArgumentNullException()
 		{
 			new StringContainsAndCaseInsensitiveComparer(null);
