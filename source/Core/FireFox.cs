@@ -31,9 +31,6 @@ namespace WatiN.Core
 {
     public class FireFox : Browser 
     {
-        public static string IpAdress = FireFoxClientPort.LOCAL_IP_ADRESS;
-        public static int Port = FireFoxClientPort.DEFAULT_PORT;
-
         private FFBrowser _ffBrowser;
 
         #region Public constructors / destructor
@@ -189,7 +186,7 @@ namespace WatiN.Core
                     }
                     else
                     {
-                        throw new FireFoxException("Unable to determine the current version of FireFox tried looking in the registry and the common locations on disk, please make sure you have installed FireFox and Jssh correctly");
+                        throw new FireFoxException("Unable to determine the current version of FireFox tried looking in the registry and the common locations on disk, please make sure you have installed FireFox");
                     }
                 }
             }
@@ -206,21 +203,21 @@ namespace WatiN.Core
             var currentVersion = (string)mozillaKey.GetValue("CurrentVersion");
             if (string.IsNullOrEmpty(currentVersion))
             {
-                throw new FireFoxException("Unable to determine the current version of FireFox using the registry, please make sure you have installed FireFox and Jssh correctly");
+                throw new FireFoxException("Unable to determine the current version of FireFox using the registry, please make sure you have installed FireFox");
             }
 
-            var currentMain = mozillaKey.OpenSubKey(string.Format(@"{0}\Main", currentVersion));
+            var currentMain = mozillaKey.OpenSubKey($@"{currentVersion}\Main");
             if (currentMain == null)
             {
                 throw new FireFoxException(
-                    "Unable to determine the current version of FireFox using the registry, please make sure you have installed FireFox and Jssh correctly");
+                    "Unable to determine the current version of FireFox using the registry, please make sure you have installed FireFox");
             }
 
             var path = (string)currentMain.GetValue("PathToExe");
             if (!File.Exists(path))
             {
                 throw new FireFoxException(
-                    "FireFox executable listed in the registry does not exist, please make sure you have installed FireFox and Jssh correctly");
+                    "FireFox executable listed in the registry does not exist, please make sure you have installed FireFox");
             }
 
             return path;
@@ -285,7 +282,7 @@ namespace WatiN.Core
 
         internal static FireFoxClientPort GetClientPort()
         {
-            return new FireFoxClientPort(IpAdress, Port);
+            return new FireFoxClientPort();
         }
     }
 }

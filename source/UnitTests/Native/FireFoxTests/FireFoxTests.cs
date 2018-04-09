@@ -49,7 +49,7 @@ namespace WatiN.Core.UnitTests.FireFoxTests
         [Test, Category("InternetConnectionNeeded")]
         public void GoogleSearchWithEncodedQueryStringInConstructor()
         {
-            var url = string.Format("http://www.google.com/search?q={0}", HttpUtility.UrlEncode("a+b"));
+            var url = $"http://www.google.com/search?q={HttpUtility.UrlEncode("a+b")}";
 
             using (var firefox = new FireFox(url))
             {

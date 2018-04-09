@@ -24,7 +24,7 @@ namespace WatiN.Core.Native
     {
         public static string WrapCommandInTimer(string command)
         {
-            return "window.setTimeout(function() {" + command + ";" + "}, 5);";
+            return $"window.setTimeout(function() {{{command};}}, 5);";
         }
 
         public static IEnumerable<JSElement> ElementArrayEnumerator(string getElementsCommand, ClientPortBase clientPort)
@@ -51,14 +51,14 @@ namespace WatiN.Core.Native
 
         private static void DeleteElementArray(string elementName, IClientPort clientPort)
         {
-            var command = string.Format("delete {0};", elementName);
+            var command = $"delete {elementName};";
 
             clientPort.Write(command);
         }
 
         private static int GetNumberOfElements(string getElementsCommand, IClientPort clientPort, string elementArrayName)
         {
-            var command = string.Format("{0}={1}; {0}.length;", elementArrayName, getElementsCommand);
+            var command = $"{elementArrayName}={getElementsCommand}; {elementArrayName}.length;";
 
             return clientPort.WriteAndReadAsInt(command);
         }

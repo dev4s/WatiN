@@ -16,6 +16,8 @@
 
 #endregion Copyright
 
+//TODO: remove jssh.xpi support for newer chrome, try to find other solutions
+
 # if INCLUDE_CHROME
 
 namespace WatiN.Core.Native.Chrome

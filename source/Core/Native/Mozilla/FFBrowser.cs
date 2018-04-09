@@ -40,7 +40,7 @@ namespace WatiN.Core.Native.Mozilla
         /// <param name="waitForComplete">If false, makes to execution of LoadUri asynchronous.</param>
         protected override void LoadUri(Uri url, bool waitForComplete)
         {
-            var command = string.Format("{0}.loadURI(\"{1}\");", BrowserVariableName, url.AbsoluteUri);
+            var command = $"{BrowserVariableName}.loadURI(\"{url.AbsoluteUri}\");";
             if (!waitForComplete)
             {
                 command = JSUtils.WrapCommandInTimer(command);
@@ -49,9 +49,6 @@ namespace WatiN.Core.Native.Mozilla
             ClientPort.Write(command);
         }
 
-        public override INativeDocument NativeDocument
-        {
-            get { return new FFDocument(ClientPort);  }
-        }
+        public override INativeDocument NativeDocument => new FFDocument(ClientPort);
     }
 }

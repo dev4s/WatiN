@@ -91,11 +91,13 @@ namespace WatiN.Core.UnitTests.TestUtils
             // Valid when executing WatiN UnitTests in a deployed situation. 
             var htmlTestFilesLocation = baseDirectory.FullName + @"\html\";
 
-            if (!Directory.Exists(htmlTestFilesLocation))
+            if (Directory.Exists(htmlTestFilesLocation)) return htmlTestFilesLocation;
+
+            // If html directory not found, search one dir up in the directory tree
+            // Valid when executing WatiN UnitTests from within Visual Studio
+            if (baseDirectory.Parent?.Parent != null)
             {
-                // If html directory not found, search one dir up in the directory tree
-                // Valid when executing WatiN UnitTests from within Visual Studio
-                htmlTestFilesLocation = baseDirectory.Parent.FullName + @"\html\";
+                htmlTestFilesLocation = baseDirectory.Parent.Parent.FullName + @"\html\";
             }
 
             return htmlTestFilesLocation;

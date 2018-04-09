@@ -37,6 +37,7 @@ namespace WatiN.Core.Native.Mozilla
         public static int DEFAULT_PORT = 9997;
 
         public string IpAdress { get; set; }
+
         public int Port { get; set; }
 
         /// <summary>
@@ -68,6 +69,8 @@ namespace WatiN.Core.Native.Mozilla
             Port = port;
         }
 
+        public FireFoxClientPort() : this(LOCAL_IP_ADRESS, DEFAULT_PORT) {}
+
         /// <summary>
         /// Finalizes an instance of the <see cref="FireFoxClientPort"/> class. 
         /// Releases unmanaged resources and performs other cleanup operations before the
@@ -87,31 +90,19 @@ namespace WatiN.Core.Native.Mozilla
         /// <summary>
         /// Gets the name of the javascript variable that references the DOM:document object.
         /// </summary>
-        public override string DocumentVariableName
-        {
-            get { return "doc"; }   
-        }
+        public override string DocumentVariableName => "doc";
 
         /// <summary>
         /// Gets the type of java script engine.
         /// </summary>
         /// <value>The type of java script engine.</value>
-        public override JavaScriptEngineType JavaScriptEngine
-        {
-            get
-            {
-                return JavaScriptEngineType.Mozilla;
-            }
-        }
+        public override JavaScriptEngineType JavaScriptEngine => JavaScriptEngineType.Mozilla;
 
         /// <summary>
         /// Gets the name of the browser variable.
         /// </summary>
         /// <value>The name of the browser variable.</value>
-        public override string BrowserVariableName
-        {
-            get { return "browser"; }
-        }
+        public override string BrowserVariableName => "browser";
 
         /// <summary>
         /// Gets a value indicating whether the main FireFox window is visible, it's possible that the
@@ -174,17 +165,17 @@ namespace WatiN.Core.Native.Mozilla
 
             if (createNewFireFoxInstance) CreateNewFireFoxInstance(url);
 
-            Logger.LogDebug("Attempting to connect to jssh server on localhost port 9997.");
+            Logger.LogDebug("Attempting to connect to remote debugger server on localhost port 9997.");
 
-            ConnectToJsshServer();
+            ConnectToRemoteDebuggerServer();
             WaitForConnectionEstablished();
 
-            Logger.LogDebug("Successfully connected to FireFox using jssh.");
+            Logger.LogDebug("Successfully connected to FireFox's remote debugger server.");
 
             if (createNewFireFoxInstance) DefineDefaultJSVariablesForWindow(0);
         }
 
-        private void ConnectToJsshServer()
+        private void ConnectToRemoteDebuggerServer()
         {
             _telnetSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) {Blocking = true};
 
@@ -195,22 +186,11 @@ namespace WatiN.Core.Native.Mozilla
             }
             catch (SocketException sockException)
             {
-                Logger.LogDebug(string.Format("Failed connecting to jssh server.\nError code:{0}\nError message:{1}", sockException.ErrorCode, sockException.Message));
-                throw new FireFoxException("Unable to connect to jssh server, please make sure you have correctly installed the jssh.xpi plugin", sockException);
+                Logger.LogDebug($"Failed connecting to remote debugger server.\nError code:{sockException.ErrorCode}\nError message:{sockException.Message}");
+                throw new FireFoxException("Unable to connect to remote debugger server", sockException);
             }
         }
-
-        internal override System.Diagnostics.Process Process
-        {
-            get
-            {
-                return FireFox.CurrentProcess;
-            }
-            set
-            {
-                // not possible;
-            }
-        }
+        internal override System.Diagnostics.Process Process => FireFox.CurrentProcess;
 
         private void CreateNewFireFoxInstance(string url)
         {
@@ -219,7 +199,7 @@ namespace WatiN.Core.Native.Mozilla
             CloseExistingFireFoxInstances();
 
             if (string.IsNullOrEmpty(url)) url = "about:blank";
-            FireFox.CreateProcess(url + " -jssh", true);
+            FireFox.CreateProcess($"{url} -start-debugger-server {Port}", true);
 
             if (IsMainWindowVisible) return;
             if (!IsRestoreSessionDialogVisible) return;
@@ -235,7 +215,7 @@ namespace WatiN.Core.Native.Mozilla
         {
             if (Connected)
             {
-                throw new FireFoxException("Already connected to jssh server.");
+                throw new FireFoxException("Already connected to Firefox's remote debug server.");
             }
         }
 
@@ -337,12 +317,6 @@ namespace WatiN.Core.Native.Mozilla
 
         private void CloseFireFoxProcess()
         {
-            //if (Process == null) return;
-            
-            //Process.WaitForExit(5000);
-            
-            //if (Process == null || Process.HasExited) return;
-
             System.Diagnostics.Process firefoxProcess = FireFox.CurrentProcess;
             if (firefoxProcess == null)
             {
@@ -586,7 +560,8 @@ namespace WatiN.Core.Native.Mozilla
         /// </exception>
         private void CloseExistingFireFoxInstances()
         {
-            System.Diagnostics.Process firefoxProcess = FireFox.CurrentProcess;
+            var firefoxProcess = FireFox.CurrentProcess;
+
             if (firefoxProcess != null && !Settings.CloseExistingFireFoxInstances)
             {
                 throw new FireFoxException("Existing instances of FireFox detected.");
@@ -595,7 +570,7 @@ namespace WatiN.Core.Native.Mozilla
             var currentProcess = FireFox.CurrentProcess;
             if (currentProcess != null && !currentProcess.HasExited)
             {
-                firefoxProcess.Kill();
+                firefoxProcess?.Kill();
             }
         }
 
@@ -607,7 +582,7 @@ namespace WatiN.Core.Native.Mozilla
             SendCommand("\n");
             
             var rawResponse = string.Empty;
-            var responseToWaitFor = "Welcome to the Mozilla JavaScript Shell!\n\n> \n> \n> "; // .Replace("\n", Environment.NewLine);
+            var responseToWaitFor = "Welcome to the Mozilla JavaScript Shell!\n\n> \n> \n> ";
 
             while (rawResponse != responseToWaitFor)
             {

@@ -23,7 +23,7 @@ namespace WatiN.Core.UnitTests.FireFoxTests
 {
     public class FFBrowserTestManager : IBrowserTestManager
     {
-        private FireFox firefox;
+        private FireFox _firefox;
 
         public Browser CreateBrowser(Uri uri)
         {
@@ -32,19 +32,14 @@ namespace WatiN.Core.UnitTests.FireFoxTests
 
         public Browser GetBrowser(Uri uri)
         {
-            if (firefox == null)
-            {
-                firefox = (FireFox) CreateBrowser(uri);
-            }
-
-            return firefox;
+            return _firefox ?? (_firefox = (FireFox) CreateBrowser(uri));
         }
 
         public void CloseBrowser()
         {
-            if (firefox == null) return;
-            firefox.Dispose();
-            firefox = null;
+            if (_firefox == null) return;
+            _firefox.Dispose();
+            _firefox = null;
         }
     }
 }

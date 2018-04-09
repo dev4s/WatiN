@@ -33,7 +33,7 @@ namespace WatiN.Core.Native
         /// Used by CreateElementVariableName
         /// </summary>
         private static readonly VariableNameHelper VariableNameHelper = new VariableNameHelper();
-        private bool? _javaSriptSupportsQuerySelector = null;
+        private bool? _javaSriptSupportsQuerySelector;
 
         /// <summary>
         /// Gets the last response recieved from the jssh server
@@ -46,6 +46,7 @@ namespace WatiN.Core.Native
         protected ClientPortBase()
         {
             Response = new StringBuilder();
+            Process = null;
         }
 
         /// <summary>
@@ -78,7 +79,7 @@ namespace WatiN.Core.Native
         /// Gets or sets the browser process.
         /// </summary>
         /// <value>The browser process.</value>
-        internal virtual Process Process { get; set; }
+        internal virtual Process Process { get; }
 
         /// <summary>
         /// Gets or sets the last response without any cleaning applied to it.
@@ -97,26 +98,18 @@ namespace WatiN.Core.Native
         /// </summary>
         protected string LastResponse
         {
-            get
-            {
-                return LastResponseIsNull ? null : _lastResponse;
-            }
-
-            set
-            {
-                _lastResponse = value;
-            }
+            get => LastResponseIsNull ? null : _lastResponse;
+            set => _lastResponse = value;
         }
 
         /// <summary>
         /// Gets a value indicating whether the last response was <c>true</c>.
         /// </summary>
-        protected bool LastResponseAsBool
+        private bool LastResponseAsBool
         {
             get
             {
-                bool lastBoolResponse;
-                Boolean.TryParse(LastResponse, out lastBoolResponse);
+                bool.TryParse(LastResponse, out var lastBoolResponse);
                 return lastBoolResponse;
             }
         }
@@ -125,13 +118,7 @@ namespace WatiN.Core.Native
         /// Gets a value indicating whether last response is null.
         /// </summary>
         /// <value><c>true</c> if last response is null; otherwise, <c>false</c>.</value>
-        private bool LastResponseIsNull
-        {
-            get
-            {
-                return _lastResponse.Equals("null", StringComparison.OrdinalIgnoreCase);
-            }
-        }
+        private bool LastResponseIsNull => _lastResponse.Equals("null", StringComparison.OrdinalIgnoreCase);
 
         /// <summary>
         /// Gets LastResponseAsInt.
@@ -139,10 +126,7 @@ namespace WatiN.Core.Native
         /// <value>
         /// The last response as int.
         /// </value>
-        private int LastResponseAsInt
-        {
-            get { return string.IsNullOrEmpty(LastResponse) ? 0 : int.Parse(_lastResponse.Trim()); }
-        }
+        private int LastResponseAsInt => string.IsNullOrEmpty(LastResponse) ? 0 : int.Parse(_lastResponse.Trim());
 
         public bool HasJavaScriptSupportForQuerySelector
         {
@@ -223,10 +207,7 @@ namespace WatiN.Core.Native
         /// Creates a unique variable name, i.e. doc.watin23
         /// </summary>
         /// <returns>A unique variable.</returns>
-        public string CreateVariableName()
-        {
-            return string.Format("{0}.{1}", DocumentVariableName, VariableNameHelper.CreateVariableName());
-        }
+        public string CreateVariableName() => $"{DocumentVariableName}.{VariableNameHelper.CreateVariableName()}";
 
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
@@ -239,7 +220,6 @@ namespace WatiN.Core.Native
         /// </summary>
         /// <param name="url">The URL to connect to.</param>
         public abstract void Connect(string url);
-
 
         /// <summary>
         /// Writes the specified data to the jssh server.

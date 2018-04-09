@@ -64,6 +64,7 @@ namespace WatiN.Core.UnitTests
 	                      	Assert.That(element.Exists, Is.True);			                          	                 
 	                      });
 		}
+
         // TODO: This should be mocked cause there is no browser logic involved
 		[Test]
 		public void AncestorTypeShouldReturnTypedElement()

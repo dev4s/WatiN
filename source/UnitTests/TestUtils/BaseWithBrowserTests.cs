@@ -69,7 +69,7 @@ namespace WatiN.Core.UnitTests.TestUtils
         {
             base.FixtureSetup();
 #if !IncludeChromeInUnitTesting
-            BrowsersToTestWith.Add(ieManager);
+            //BrowsersToTestWith.Add(ieManager);
             BrowsersToTestWith.Add(ffManager);
 #else
 		    BrowsersToTestWith.Add(chromeManager);
