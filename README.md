@@ -2,25 +2,39 @@
 This is my work on the WatiN source code. As one of my projects is still reusing the WatiN (it's a good library for automated testing) I needed to make some changes to the source code. I'm leaving some of the original things, but some of them will be removed.
 
 ## Planned roadmap
-0. Cleaning the project. :heavy_check_mark:
-1. Move project to VS2017. :heavy_check_mark:
-2. Change .Net version. :heavy_check_mark:
-3. Reuse Nuget for the needed libraries (and use newer ones, we like this :)). :heavy_check_mark:
-4. Support for newer browsers:
-    1. Firefox (without JSSH, need to find what should be used).
-    2. Chrome (Jeroen started worked on it, but it's in reaaalllyyy unstable place).
-    3. IE 11 (Windows 10), Edge. (I don't think that IE 10 will be necessary [it should work, but I don't think it should support it]).
-    4. PhantomJS.
-5. Move browsers support to external libraries, should reduce dependencies and also allow to write plugins for other "browsers".
-5. Fix tests (almost all of them, moqs).
-6. Remove documentation links to original page.
-7. Fix examples folder.
+- [x] Cleaning the project.
+- [x] Move project to VS2017.
+- [x] Change .Net version.
+- [x] Reuse Nuget for the needed libraries (and use newer ones, we like this :)).
+- [ ] Support for newer browsers:
+    - [ ] Firefox (without JSSH, need to find what should be used).
+    - [ ] Chrome (Jeroen started worked on it, but it's in reaaalllyyy unstable place).
+    - [ ] IE 11 (Windows 10), Edge. (I don't think that IE 10 will be necessary [it should work, but I don't think it should support it]).
+    - [ ] PhantomJS, Firefox -headless.
+    - [ ] Firefox for Android
+    - [ ] Firefox OS
+- [ ] Move browsers support to external libraries, should reduce dependencies and also allow to write plugins for other "browsers".
+- [ ] Fix tests (almost all of them, moqs).
+- [ ] Remove documentation links to original page.
+- [ ] Fix examples folder.
 
 ## Credits
 @Jeroen van Menen - for the awesome work on this.
 
 ## Notes
 - I know that there are currently better options to automate browsers, but WatiN was so easy to use ;)
+
+### Firefox usage
+- close all running instances of Firefox
+- run Firefox
+- go to about:config
+- find and change:
+
+Preference Name                       | Value   | Comment
+--------------------------------------|---------|---------
+`devtools.debugger.remote-enabled`    | `true`  | Required
+`devtools.chrome.enabled`             | `true`  | Required
+`devtools.debugger.prompt-connection` | `false` | Recommended
 
 ## Original readme.txt (this will be removed/changed in future)
 
